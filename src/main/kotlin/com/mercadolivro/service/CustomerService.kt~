@@ -19,7 +19,7 @@ class CustomerService(
     }
 
     fun create(customer: CustomerModel) {
-        customerRepository.save(customer)
+        customers.add(customer)
     }
 
     fun getCustomer(id: Int): CustomerModel {
