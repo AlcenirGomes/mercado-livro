@@ -9,13 +9,11 @@ class CustomerService(
     val customerRepository: CustomerRepository
 ) {
 
-    val customers = mutableListOf<CustomerModel>()
-
     fun getAll(name: String?): List<CustomerModel> {
         name?.let {
-            return customers.filter { it.name.contains(name, true) }
+            return customerRepository.findByNameContaining(it)
         }
-        return customers
+        return customerRepository.findAll().toList()
     }
 
     fun create(customer: CustomerModel) {
@@ -23,18 +21,21 @@ class CustomerService(
     }
 
     fun getCustomer(id: Int): CustomerModel {
-        return customers.filter { it.id == id }.first()
+        return customerRepository.findById(id).orElseThrow()
     }
 
     fun update(customer: CustomerModel) {
-        customers.filter { it.id == customer.id }.first().let {
-            it.name = customer.name
-            it.email = customer.email
+        if(!customerRepository.existsById(customer.id!!)){
+            throw Exception()
         }
+        customerRepository.save(customer)
     }
 
     fun delete(id: Int) {
-        customers.removeIf { it.id == id }
+        if(!customerRepository.existsById(id)){
+            throw Exception()
+        }
+        customerRepository.deleteById(id)
     }
 
 }
