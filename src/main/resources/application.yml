@@ -10,3 +10,12 @@ spring:
     hibernate:
       ddl-auto: update # ou "create-drop" para desenvolvimento
     show-sql: true
+
+  flyway:
+    enabled: true
+    url: jdbc:mysql://localhost:3306/mercadolivro?createDatabaseIfNotExist=true
+    schemas: mercadolivro
+    defaultSchema: mercadolivro # default schema is important
+    user: root
+    password: root
+    baseline-on-migrate: true
