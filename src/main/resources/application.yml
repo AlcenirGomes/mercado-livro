@@ -13,7 +13,7 @@ spring:
 
   flyway:
     enabled: true
-    url: jdbc:mysql://localhost:3306/mercadolivro?createDatabaseIfNotExist=true6
+    url: jdbc:mysql://localhost:3306/mercadolivro?createDatabaseIfNotExist=true
     schemas: mercadolivro
     defaultSchema: mercadolivro # default schema is important
     user: root
